@@ -6,6 +6,7 @@ https://www.arduino.cc/en/software
 
 2) Download and copy thermocouple libraries to the "Arduino libraries" folder as subfolder "PWFusion_MAX31856"  
   2A) path example: ...\Documents\Arduino\libraries\PWFusion_MAX31856
+  2B) Four files starting with "PlayingWithFusion_"
 
 3) Open "thermal_degeneration.ino" code
 
