@@ -1,21 +1,19 @@
 # peltier_degeneration
-Peltier system for assaying thermally induced degeneration in Drosophila
-Designed by Jacob Jaszczak and Luke Breuer
+Peltier system for assaying thermally induced degeneration in Drosophila.  
+Designed by Jacob Jaszczak and Luke Breuer  
 Built by Jacob Jaszczak
 
 1) Install Arduino IDE 
 https://www.arduino.cc/en/software
 
 2) Download and copy thermocouple libraries to the "Arduino libraries" folder as subfolder "PWFusion_MAX31856"  
-
 	2A: path example: ...\Documents\Arduino\libraries\PWFusion_MAX31856
 	
 	2B: Four files starting with "PlayingWithFusion_"
 
 3) Open "thermal_degeneration.ino" code
 
-4) Set up IDE
-
+4) Set up IDE  
 	4A: Tools > Board > "Arduino Uno"
 	
 	4B: Port > Select port that is activated by the USB connection.
