@@ -15,15 +15,12 @@ https://www.arduino.cc/en/software
              *If port does not appear, or IDE cannot connet to the beard during upload, then trouble shoot through the manager*
   4C) Serial Monitor > Baud > "38400"
 
-5) Edit # Assay variables #
-
-  targetTemp = target temperature that program is held at 
-  beginningHold = seconds after start button is pressed before the thermal program begins   
-  holdTarget = seconds that the target temperature is held for
-  assayTime = total assay time, afterwhich the Peltiers with shutdown but the fans will remain on 
-
-  *note, time variables must be in seconds
-
+5) Edit # Assay variables # *note, time variables must be in seconds
+  - targetTemp = target temperature that program is held at. 
+  - beginningHold = seconds after start button is pressed before the thermal program begins.
+  - holdTarget = seconds that the target temperature is held for.
+  - assayTime = total assay time, afterwhich the Peltiers with shutdown but the fans will remain on. 
+  
 6) Upload "thermal_degeneration.ino" code to microcontroler (button with arrow). 
 
 7) Open Serial Monitor
