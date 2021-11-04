@@ -1,9 +1,5 @@
 /***************************************************************************
 This program runs two Peltiers, two k-type thermalcouples, and two CPU coolers for Drosophila temperature treatment
-
-Designed by Jacob Jaszczak and Luke Breuer
-Built by Jacob Jaszczak
-
 M1 controls both Peltiers  
 M2 controls both fans 
 Thermocouple code from PlayingSEN30006_MAX31856_example.ino
@@ -283,9 +279,9 @@ digitalWrite(URC10_MOTOR_2_DIR, 0); //Fan
     Serial.print("DONE;");
   }
   
-  while (currentTime > assayTime){ //end program when assay length is done 
+  while (currentTime > assayTime){ //end program when assay length is done and hold in loop 
     analogWrite(URC10_MOTOR_1_PWM, 0); //turn peltier off 
-    //analogWrite(URC10_MOTOR_2_PWM, 0); //turn off Fan
+    analogWrite(URC10_MOTOR_2_PWM, 0); //turn off Fan
     digitalWrite(ledPin, LOW);
     delay (1000);
   }
