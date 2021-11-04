@@ -5,16 +5,21 @@ Peltier system for assaying thermally induced degeneration in Drosophila
 https://www.arduino.cc/en/software
 
 2) Download and copy thermocouple libraries to the "Arduino libraries" folder as subfolder "PWFusion_MAX31856"  
-  2A) path example: ...\Documents\Arduino\libraries\PWFusion_MAX31856
-  2B) Four files starting with "PlayingWithFusion_"
+
+	2A: path example: ...\Documents\Arduino\libraries\PWFusion_MAX31856
+	
+	2B: Four files starting with "PlayingWithFusion_"
 
 3) Open "thermal_degeneration.ino" code
 
 4) Set up IDE
-  4A) Tools > Board > "Arduino Uno"
-  4B) Port > *Select port that activated by the USB connection* 
-             *If port does not appear, or IDE cannot connet to the beard during upload, then trouble shoot through the manager*
-  4C) Serial Monitor > Baud > "38400"
+
+	4A: Tools > Board > "Arduino Uno"
+	
+	4B: Port > Select port that is activated by the USB connection.
+						*If port does not appear, or IDE cannot connet to the beard during upload, then trouble shoot through the manager*
+
+	4C: Serial Monitor > Baud > "38400"
 
 5) Edit # Assay variables # *note, time variables must be in seconds
   - targetTemp = target temperature that program is held at. 
