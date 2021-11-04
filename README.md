@@ -1,5 +1,7 @@
 # peltier_degeneration
 Peltier system for assaying thermally induced degeneration in Drosophila
+Designed by Jacob Jaszczak and Luke Breuer
+Built by Jacob Jaszczak
 
 1) Install Arduino IDE 
 https://www.arduino.cc/en/software
