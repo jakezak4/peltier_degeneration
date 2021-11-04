@@ -1,5 +1,9 @@
 /***************************************************************************
 This program runs two Peltiers, two k-type thermalcouples, and two CPU coolers for Drosophila temperature treatment
+
+Designed by Jacob Jaszczak and Luke Breuer
+Built by Jacob Jaszczak
+
 M1 controls both Peltiers  
 M2 controls both fans 
 Thermocouple code from PlayingSEN30006_MAX31856_example.ino
