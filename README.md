@@ -10,15 +10,19 @@ For MAC and Linux, see URC10 Cytron manual.
 https://www.arduino.cc/en/software
 
 3) Download and copy thermocouple libraries to the "Arduino libraries" folder as subfolder "PWFusion_MAX31856"  
-	2A: path example: ...\Documents\Arduino\libraries\PWFusion_MAX31856
+	2A: Create folder "PWFusion_MAX31856" in "Arduino libraries" directory  
 	
-	2B: Add to the subfolder the 4 files starting with "PlayingWithFusion_"
+	2B: path example: ...\Documents\Arduino\libraries\PWFusion_MAX31856
+	
+	2C: Add the 4 files starting with "PlayingWithFusion_" to the subfolder 
 
 4) Download and move thermal_degeneration.ino file to Arduino folder as subfolder "thermal_degeneration".  
 		*note folder name and file name must match.*   
-	4A: path example: ...\Documents\Arduino\thermal_degeneration\thermal_degeneration.ino  
+	4A: Create folder "thermal_degeneration" in "Arduino" directory  
 	
-	4B: Open "thermal_degeneration.ino" in Arduino IDE 
+	4B: path example: ...\Documents\Arduino\thermal_degeneration\thermal_degeneration.ino  
+	
+	4C: Open "thermal_degeneration.ino" in Arduino IDE 
 
 5) Set up IDE  
 	4A: Tools > Board > select "Arduino Uno"
