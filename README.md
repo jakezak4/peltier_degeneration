@@ -9,8 +9,8 @@ For MAC and Linux, see URC10 Cytron manual.
 2) Install Arduino IDE 
 https://www.arduino.cc/en/software
 
-3) Download and copy thermocouple libraries to the "Arduino libraries" folder as subfolder "PWFusion_MAX31856"  
-	2A: Create folder "PWFusion_MAX31856" in "Arduino libraries" directory  
+3) Download and copy thermocouple libraries to the Arduino libraries folder as subfolder "PWFusion_MAX31856"  
+	2A: Create folder "PWFusion_MAX31856" in "libraries" directory  
 	
 	2B: path example: ...\Documents\Arduino\libraries\PWFusion_MAX31856
 	
