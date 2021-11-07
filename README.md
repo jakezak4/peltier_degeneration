@@ -48,4 +48,4 @@ https://www.arduino.cc/en/software
 
 11) Save Serial Monitor data by copy all (control + A) and paste (control + c) into a Notepad file
 
-12) Reset Serial Monitor with the "clear" button before beginning another assay 
+12) Reset Serial Monitor with the "Clear output" button before beginning another assay 
