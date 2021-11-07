@@ -13,7 +13,7 @@ Thermocouple code from PlayingSEN30006_MAX31856_example.ino
 int targetTemp = 4; //final temp of the ramp
 int beginningHold = 10; //time before PWM begins UNIT = seconds 
 float holdTarget = 40; //time of target temp hold UNIT = seconds 
-float assayTime = 200; //time total assay time UNIT = seconds 
+float assayTime = 200; //total assay time (beginningHold+ramp+holdTarget+extra) UNIT = seconds 
 // #####################################################################
 // #####################################################################
 
@@ -41,8 +41,9 @@ int constRateAdjust; // contrained to 0-255
 
 float cProportion = 100 / targetTemp * 1.6; //PI control
 float cIntegral = cProportion / 10.0;
-float maxIntegral = 7.1*targetTemp-183; //originally 125 for 44oC
-float integral = 0.0; // the "I" in PID ##### changing to try to prevent initial drop 
+float maxIntegral = (5.0525*targetTemp) - 85.215; //this works for 38 to 46oc 
+float integralActual = 0.0; // the "I" in PID ##### changing to try to prevent initial drop
+float integralFunctional = integralActual;
 
 byte M1ArrayPower = 0; //Motor1 Array of Peltiers 
 char peltierPower[4];
@@ -87,11 +88,11 @@ void setup(){
   Serial.print("Press ON to start. ");
   Serial.print("Target Temp is ");
   Serial.print(targetTemp);
-  Serial.print(". Hold for ");
-  Serial.print(holdTarget);
-  Serial.print("secs. after ");
+  Serial.print("oC. Hold for ");
+  Serial.print(holdTarget, 0);
+  Serial.print("secs after ");
   Serial.print(beginningHold);
-  Serial.print(" delay PWM = ((sec-hold)+30)/1.5");
+  Serial.print("sec start delay. PWM = ((sec-hold)+60)/1.5");
   Serial.print(";");
   Serial.println();  
 // #####################################################################
@@ -219,18 +220,24 @@ digitalWrite(URC10_MOTOR_2_DIR, 0); //Fan
   }
 
   float proportion = targetTemp - tmp0;
-  integral += proportion;
-  if (integral > maxIntegral)
-    integral = maxIntegral;
-  else if (integral < -maxIntegral)
-    integral = -maxIntegral;  
 
   if (currentTime < beginningHold){
     rateAdjust = 0;
-  } else if (assayMax == false) { 
+  } else {
+    
+    integralActual += proportion;
+    integralFunctional = integralActual; 
+  
+    if (integralActual > maxIntegral)
+      integralFunctional = maxIntegral;
+    else if (integralActual < -maxIntegral)
+      integralFunctional = -maxIntegral;  
+  }
+  
+  if (assayMax == false & currentTime > beginningHold) { 
     digitalWrite(URC10_MOTOR_1_DIR, tempDirection);
-    rateAdjust = floor(((currentTime-beginningHold)+30) / 1.5);    // 0.4 oC/sec
-    //rateAdjust = floor(((currentTime) / 1.5);                    // 1.05 oC/sec
+    //rateAdjust = floor(((currentTime-beginningHold)+60) / 1.5);
+    rateAdjust = cProportion * proportion + cIntegral * integralFunctional;
   } else if (assayMax == true) { 
     if (holdMax == false) {
       startHold = currentTime;
@@ -241,9 +248,9 @@ digitalWrite(URC10_MOTOR_2_DIR, 0); //Fan
     
     if (holdTargetCount <= holdTarget){
       digitalWrite(URC10_MOTOR_1_DIR, tempDirection);
-      rateAdjust = cProportion * proportion + cIntegral * integral;
+      rateAdjust = cProportion * proportion + cIntegral * integralFunctional;
       } 
-    else if (holdTargetCount >= holdTarget){
+    else if (holdTargetCount > holdTarget){
       rateAdjust = 0;
       }    
   }
@@ -258,13 +265,14 @@ digitalWrite(URC10_MOTOR_2_DIR, 0); //Fan
 
   M1ArrayPower = (byte) constRateAdjust;  //set PWM byte from polynomial scaling 
 
-  /* Trouble Shooting  
-  Serial.print("rateAdjust;");
-  Serial.print(rateAdjust);
+   
+  //Trouble Shooting  
+  Serial.print("integralActual;");
+  Serial.print(integralActual);
   Serial.print("; ");
-  Serial.print("integral;");
-  Serial.print(integral);
-  */
+  Serial.print("integralFunctional;");
+  Serial.print(integralFunctional);
+  
   
   Serial.print("PWM;");
   Serial.print(M1ArrayPower);
