@@ -39,11 +39,14 @@ int absTempPercent; //make all temp values positive
 int rateAdjust; //adjusted rate of PWM power based
 int constRateAdjust; // contrained to 0-255 
 
-float cProportion = 100 / targetTemp * 1.6; //PI control
+float proportion;
+//float cProportion = 100 / targetTemp * 1.6; //testing
+float cProportion = 25.788 * pow(targetTemp,-0.549); //this works for 4 and 38 to 46oc
 float cIntegral = cProportion / 10.0;
-float maxIntegral = (5.0525*targetTemp) - 85.215; //this works for 38 to 46oc 
+//float maxIntegral = 140; //testing
+float maxIntegral = 0.1418 * pow(targetTemp,2) - 5.6618 * targetTemp + 100.38; //this works for 4 and 38 to 46oc
 float integralActual = 0.0; // the "I" in PID ##### changing to try to prevent initial drop
-float integralFunctional = integralActual;
+float integralFunctional;
 
 byte M1ArrayPower = 0; //Motor1 Array of Peltiers 
 char peltierPower[4];
@@ -124,8 +127,8 @@ digitalWrite(URC10_MOTOR_2_DIR, 0); //Fan
   delay(500);                                   // 500ms delay... can be as fast as ~100ms in continuous mode, 1 samp avg
   
   static struct var_max31856 TC_CH0, TC_CH1;
-  double tmp0;
-  double tmp1; // I added a second temp variable so I can distinguish for PWM control 
+  double tmp0; // thermocouple #1
+  double tmp1; // thermocouple #2
    
   struct var_max31856 *tc_ptr;
   
@@ -209,17 +212,17 @@ digitalWrite(URC10_MOTOR_2_DIR, 0); //Fan
   float targetVSroom = targetTemp - tmp1; 
   if (targetVSroom > 0){
     tempDirection = HEAT; 
-    tempPercent = ((targetTemp - tmp0)/targetTemp) * 100;  
+    tempPercent = ((targetTemp - tmp0)/targetTemp) * 100; 
+    proportion = targetTemp - tmp0; 
   } else if (targetVSroom < 0){
     tempDirection = COOL;
-    tempPercent = ((tmp0 - targetTemp)/targetTemp) * 100;
+    tempPercent = ((tmp0 - targetTemp)/tmp0) * 100;
+    proportion = (tmp0 - targetTemp) / 2; //cooling is happening too fast 
   }
   
   if (tempPercent <= 0) {
     assayMax = true; //sets when the ramp PWM should switch to hold PWM
   }
-
-  float proportion = targetTemp - tmp0;
 
   if (currentTime < beginningHold){
     rateAdjust = 0;
@@ -250,7 +253,7 @@ digitalWrite(URC10_MOTOR_2_DIR, 0); //Fan
       digitalWrite(URC10_MOTOR_1_DIR, tempDirection);
       rateAdjust = cProportion * proportion + cIntegral * integralFunctional;
       } 
-    else if (holdTargetCount > holdTarget){
+    else if (holdTargetCount > holdTarget){ //end thermal cycle 
       rateAdjust = 0;
       }    
   }
