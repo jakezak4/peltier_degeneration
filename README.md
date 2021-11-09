@@ -38,7 +38,8 @@ https://www.arduino.cc/en/software
   - targetTemp = target temperature that program is held at. 
   - beginningHold = seconds after start button is pressed before the thermal program begins.
   - holdTarget = seconds that the target temperature is held for. After hold time is complete the Peltiers will turn off, but he fans and the thermocouples will stay on. 
-  - assayTime = total assay time, afterwhich the fans will shutdown and the thermocouples will stop recording. 
+  - assayTime = total assay time, afterwhich the fans will shutdown and the thermocouples will stop recording.  
+  	-Total assay time needs to include beginningHold + ramp time + holdTarget + any extra for equilibrating to room temp. 
   
 7) Upload "thermal_degeneration.ino" code to microcontroller (button at top left with arrow). 
 
