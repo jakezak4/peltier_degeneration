@@ -40,12 +40,19 @@ https://www.arduino.cc/en/software
   
 7) Upload "thermal_degeneration.ino" code to microcontroller (button at top left with arrow). 
 
-8) Open Serial Monitor (Ctrl + Shift + M)
+8) Open Serial Monitor (Ctrl + Shift + M)  
 
-9) To start program, press the START button. The LED will turn on. 
 
-10) To stop program at any time, press the RESET button. This will reload the code in the microcontroller and reset all variables. 
+*Running Temperature Treatment  
 
-11) Save Serial Monitor data by copy all (control + A) and paste (control + c) into a Notepad file
+1) Before running program:  
+	1A: Do not over tighten wingnuts on the Peltiers  
+	1B: Double check that thermocouple #1 is mounted between the Peltiers. If thermocouple #1 is not mounted on the Peltier the Peltiers will run uncontrolled.  
 
-12) Reset Serial Monitor with the "Clear output" button before beginning another assay 
+2) Press the START button to begin program. The LED will turn on. 
+
+3) To stop program at any time, press the RESET button. This will reload the code in the microcontroller and reset all variables. 
+
+4) Save Serial Monitor data by copy all (control + A) and paste (control + c) into a Notepad file.
+
+5) Reset Serial Monitor with the "Clear output" button before beginning another assay. 
