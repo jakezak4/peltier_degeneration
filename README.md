@@ -3,6 +3,8 @@ Peltier system for assaying thermally induced degeneration in Drosophila.
 Designed by Jacob Jaszczak and Luke Breuer  
 Built by Jacob Jaszczak
 
+*Installation and Startup* 
+
 1) Install microcontroler driver. The board URC10 uses CH340G USB to UART converter. Download Windows driver here: http://sparks.gogo.co.nz/assets/_site_/downloads/CH34x_Install_Windows_v3_4.zip  
 For MAC and Linux, see URC10 Cytron manual. 
 
@@ -43,7 +45,7 @@ https://www.arduino.cc/en/software
 8) Open Serial Monitor (Ctrl + Shift + M)  
 
 
-*Running Temperature Treatment  
+*Running Temperature Treatment* 
 
 1) Before running program:  
 	1A: Do not over tighten wingnuts on the Peltiers  
