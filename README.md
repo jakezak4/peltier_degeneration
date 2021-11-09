@@ -45,11 +45,11 @@ https://www.arduino.cc/en/software
 8) Open Serial Monitor (Ctrl + Shift + M)  
 
 
-*Running Temperature Treatment* 
+*Running Temperature Treatment Program* 
 
 1) Before running program:  
 	1A: Do not over tighten wingnuts on the Peltiers  
-	1B: Double check that thermocouple #1 is mounted between the Peltiers. If thermocouple #1 is not mounted on the Peltier the Peltiers will run uncontrolled.  
+	1B: Double check that thermocouple #1 is mounted between the Peltiers. If thermocouple #1 is not mounted a Peltier, the Peltiers will run uncontrolled.  
 
 2) Press the START button to begin program. The LED will turn on. 
 
