@@ -12,7 +12,7 @@ Thermocouple code from PlayingSEN30006_MAX31856_example.ino
 // #####################################################################
 int targetTemp = 4; //final temp of the ramp
 int beginningHold = 10; //time before PWM begins UNIT = seconds 
-float holdTarget = 40; //time of target temp hold UNIT = seconds 
+float holdTarget = 40; //length of time that target temp held UNIT = seconds 
 float assayTime = 200; //total assay time (beginningHold+ramp+holdTarget+extra) UNIT = seconds 
 // #####################################################################
 // #####################################################################
@@ -32,13 +32,14 @@ PWF_MAX31856  thermocouple1(TC1_CS);
 //Program variables 
 
 int startDelay = 10000; //delay before PWM starts
-float startTime; //store time at which the program is started after 1st click 
+float startTime; //store time at which the program is started after button click 
 
 int tempPercent; //percent difference from sensor and target temp 
 int absTempPercent; //make all temp values positive 
 int rateAdjust; //adjusted rate of PWM power based
 int constRateAdjust; // contrained to 0-255 
 
+// PID variables 
 float proportion;
 //float cProportion = 100 / targetTemp * 1.6; //testing
 float cProportion = 25.788 * pow(targetTemp,-0.549); //this works for 4 and 38 to 46oc
@@ -48,15 +49,17 @@ float maxIntegral = 0.1418 * pow(targetTemp,2) - 5.6618 * targetTemp + 100.38; /
 float integralActual = 0.0; // the "I" in PID ##### changing to try to prevent initial drop
 float integralFunctional;
 
-byte M1ArrayPower = 0; //Motor1 Array of Peltiers 
-char peltierPower[4];
-
+//Button controler settings 
 int ledPin = 9; // button set up
 int buttonStart = A0;
 
 byte leds = 0;
 bool trigger = false;
 bool fanTrigger = false;
+
+//Motor controler settings 
+byte M1ArrayPower = 0; //Motor1 Array of Peltiers 
+char peltierPower[4];
 
 #define URC10_MOTOR_1_DIR 4 // set motor for direction control for Peltier
 #define URC10_MOTOR_1_PWM 5 // set PWM for power control for Peltier
@@ -67,7 +70,7 @@ bool fanTrigger = false;
 #define COOL 0       // motor current direction for cooling effect 
 #define HEAT 1       // motor current direction for heating effect 
 
-int tempDirection = HEAT;
+int tempDirection = COOL;
 
 void setup(){
   delay(250);                            // give chip a chance to stabilize
@@ -95,7 +98,7 @@ void setup(){
   Serial.print(holdTarget, 0);
   Serial.print("secs after ");
   Serial.print(beginningHold);
-  Serial.print("sec start delay. PWM = ((sec-hold)+60)/1.5");
+  Serial.print("sec start delay.");
   Serial.print(";");
   Serial.println();  
 // #####################################################################
